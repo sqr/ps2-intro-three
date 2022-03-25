@@ -3,14 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import Box from "./Box";
+import Escena from "./Gltf";
+import Model from "./Test";
+import { Suspense } from "react";
 
 ReactDOM.render(
   <Canvas>
-    <ambientLight />
-    <pointLight position={[10, 10, 10]} />
-    <Box position={[-1.2, 0, 0]} />
-    <Box position={[1.2, 0, 0]} />
+    <Suspense fallback={null}>
+      <Model />
+    </Suspense>
   </Canvas>,
   document.getElementById("root")
 );
