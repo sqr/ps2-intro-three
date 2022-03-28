@@ -8,14 +8,14 @@ import { MeshPhysicalMaterial } from "three";
 
 export default function Model({ ...props }) {
   const group = useRef();
-  const { nodes, animations } = useGLTF("/ps2_baked.glb");
-  console.log(nodes.Cube.material);
+  const { nodes, materials, animations } = useGLTF("/ps2_baked_black.glb");
   const material = new MeshPhysicalMaterial({
+    color: "#1400bc",
+    opacity: 1,
     roughness: 0,
     transmission: 1,
-    thickness: 0.5,
+    thickness: 1,
   });
-  console.log(material);
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
     actions["CameraAction"].play();
@@ -35,10 +35,10 @@ export default function Model({ ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group>
-        <group position={[0, 1900, 0]} rotation={[1.89, 0.88, -2.05]}>
+        <group position={[0, 8.34, 0]} rotation={[1.89, 0.88, -2.05]}>
           <pointLight
-            intensity={50}
-            decay={1}
+            intensity={1171.8}
+            decay={2}
             rotation={[-Math.PI / 2, 0, 0]}
           />
         </group>
@@ -48,7 +48,6 @@ export default function Model({ ...props }) {
           rotation={[0.1, 0, 0]}
         >
           <PerspectiveCamera
-            name="Camera_Orientation"
             makeDefault={true}
             far={100}
             near={0.1}
@@ -57,14 +56,13 @@ export default function Model({ ...props }) {
           />
         </group>
         <group />
+        <mesh geometry={nodes.Grid.geometry} material={materials.pilares} />
         <mesh
-          name="Cube"
-          geometry={nodes.Cube.geometry}
-          material={nodes.Cube.material}
-          position={[2.54, 1.06, -9.78]}
-          scale={[0.96, 2.99, 0.96]}
+          geometry={nodes.Plane.geometry}
+          material={materials.Black}
+          position={[0, 0.02, 0]}
+          scale={[10.18, 1, 6.03]}
         />
-        <mesh geometry={nodes.Grid.geometry} material={nodes.Grid.material} />
         <mesh
           name="Cube001"
           geometry={nodes.Cube001.geometry}
@@ -102,4 +100,4 @@ export default function Model({ ...props }) {
   );
 }
 
-useGLTF.preload("/ps2_baked.glb");
+useGLTF.preload("/ps2_baked_black.glb");

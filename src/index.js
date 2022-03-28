@@ -7,7 +7,16 @@ import { OrbitControls } from "@react-three/drei";
 import Box from "./Box";
 import Escena from "./Gltf";
 //import Model from "./Test";
-import Model from "./Ps2_baked";
+//import Model from "./Ps2_baked_black";
+import Model from "./Ps2_bake_bolas";
+import {
+  EffectComposer,
+  SelectiveBloom,
+  DepthOfField,
+  Bloom,
+  Noise,
+  Vignette,
+} from "@react-three/postprocessing";
 
 import { Suspense } from "react";
 
@@ -15,7 +24,7 @@ ReactDOM.render(
   <Canvas>
     <Suspense fallback={null}>
       <Model />
-      <fog name="Niebla" attach="fog" color="black" near={2} far={10} />
+      <fog name="Niebla" attach="fog" color="#060b21" near={2.5} far={10} />
     </Suspense>
   </Canvas>,
   document.getElementById("root")
